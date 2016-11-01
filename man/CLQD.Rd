@@ -40,6 +40,6 @@ CLQD(geno,SNPinfo,CLQcut = 0.5, clstgap= 40000, CLQmode = 'Density', codechange 
 
 }
 \author{
-Sun-Ah Kim <sunny03@snu.ac.kr>
+Sun-Ah Kim <sunny03@snu.ac.kr>, Yun Joo Yoo <yyoo@snu.ac.kr>
 }
 

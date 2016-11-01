@@ -52,7 +52,7 @@ LDblockHeatmap(geno, SNPinfo,chrN = 22, showSNPs = NULL)
 LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize = 10, savefile = TRUE)
 }
 \author{
-Sun-Ah Kim <sunny03@snu.ac.kr>
+Sun-Ah Kim <sunny03@snu.ac.kr>, Yun Joo Yoo <yyoo@snu.ac.kr>
 }
 \seealso{
 \code{\link{Big_LD}}

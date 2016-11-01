@@ -21,7 +21,7 @@
 # < output >
 #' @return
 #'
-#' @author Sun Ah Kim <sunny03@snu.ac.kr>
+#' @author Sun Ah Kim <sunny03@snu.ac.kr>, Yun Joo Yoo <yyoo@snu.ac.kr>
 #' @seealso \code{\link{Big_LD}}
 #'
 #' @examples

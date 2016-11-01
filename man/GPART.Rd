@@ -39,7 +39,7 @@ GPART(geno, SNPinfo, 22, genelist)
 
 }
 \author{
-Sun Ah Kim <sunny03@snu.ac.kr>
+Sun Ah Kim <sunny03@snu.ac.kr>, Yun Joo Yoo <yyoo@snu.ac.kr>
 }
 \seealso{
 \code{\link{Big_LD}}

@@ -24,7 +24,7 @@
 #' @return  A data frame of block estimation result.
 #' Each row of data frame shows the starting SNP and end SNP of each estimated LD block
 #'
-#' @author Sun-Ah Kim <sunny03@snu.ac.kr>
+#' @author Sun-Ah Kim <sunny03@snu.ac.kr>, Yun Joo Yoo <yyoo@snu.ac.kr>
 #' @seealso \code{\link{CLQD}}, \code{\link{LDblockHeatmap}}
 #'
 #' @examples

@@ -40,7 +40,7 @@ Big_LD(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, subSegmSize = 1
 
 }
 \author{
-Sun-Ah Kim <sunny03@snu.ac.kr>
+Sun-Ah Kim <sunny03@snu.ac.kr>, Yun Joo Yoo <yyoo@snu.ac.kr>
 }
 \seealso{
 \code{\link{CLQD}}, \code{\link{LDblockHeatmap}}
