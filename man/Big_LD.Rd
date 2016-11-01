@@ -37,6 +37,7 @@ data(geno)
 data(SNPinfo)
 Big_LD(geno, SNPinfo)
 Big_LD(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, subSegmSize = 1500)
+
 }
 \author{
 Sun-Ah Kim <sunny03@snu.ac.kr>
