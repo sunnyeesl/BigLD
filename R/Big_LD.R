@@ -33,10 +33,10 @@
 #' data(SNPinfo)
 #' Big_LD(geno, SNPinfo)
 #' Big_LD(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, subSegmSize = 1500)
-#' @export
 #'
 # sub-Functions 1. CLQD < built - in > 2. cutsequence.modi, 3.intervalCliqueList, 4. find.maximum.indept, 5. constructLDblock,
-Big_LD = function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, subSegmSize = 1500) {
+#' @export
+Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, subSegmSize = 1500) {
     # packages
     # library(igraph)
     #######################################################################################################

@@ -28,7 +28,7 @@
 #' @author Sun-Ah Kim <sunny03@snu.ac.kr>
 #'
 #'
-#' @export
+
 #' @importFrom igraph graph_from_adjacency_matrix
 #' @importFrom igraph graph.adjacency
 #' @importFrom igraph max_cliques
@@ -38,8 +38,8 @@
 # [61] NA 15 16 15 15 15 16 16 16 16 19 16 16 19 NA 17 17 NA NA NA NA 5 5 NA 2 2 1 1 NA 11
 # [91] 11 NA NA NA 3 3 NA NA 14 14 subfunctions
 # < built-in > 1.CliqueDecision, 2.ChooseMaximal, 3.CodeChangeV, 4.new.split.cliques
-
-CLQD = function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c("Density", "Maximal"), codechange = FALSE) {
+#' @export
+CLQD <- function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c("Density", "Maximal"), codechange = FALSE) {
     # packages
     # library(igraph)
     #######################################################################################################

@@ -38,7 +38,6 @@
 #' data(SNPinfo)
 #' LDblockHeatmap(geno, SNPinfo,chrN = 22, showSNPs = NULL)
 #' LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize = 10, savefile = TRUE)
-#' @export
 #' @import grid
 # TotalMap : object of heatmap.
 # If savefile TRUE, "LDblock_heatmap_chr[chrN]-[start bp]-[end bp].tif" file will be made.
@@ -50,8 +49,8 @@
 # 2. makeRect (built-in)    3. LDheatmap.Legend.add (built-in)
 ##################################################################################################################
 
-
-LDblockHeatmap = function(geno, SNPinfo, chrN, showSNPs = NULL, LDblockResult=NULL, tick = c("bp", "rsID"), st.bp=0 , ed.bp = Inf,
+#' @export
+LDblockHeatmap <- function(geno, SNPinfo, chrN, showSNPs = NULL, LDblockResult=NULL, tick = c("bp", "rsID"), st.bp=0 , ed.bp = Inf,
                           showLDsize = 3, savefile = FALSE){
   # packagese
   # library(grid)

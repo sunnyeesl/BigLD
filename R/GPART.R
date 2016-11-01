@@ -30,10 +30,11 @@
 #' data(allgenelist)
 #' GPART(geno, SNPinfo, 22, allgenelist)
 #'
-#' @export
+
 #' @importFrom plyr alply
 
-GPART = function(geno, SNPinfo, chrN, allgenelist, BigLDresult = NULL, minsize = 4, maxsize = 50) {
+#' @export
+GPART <- function(geno, SNPinfo, chrN, allgenelist, BigLDresult = NULL, minsize = 4, maxsize = 50) {
     #######################################################################################################
     # sub-Functions 1. Big_LD 2. LDblockSplit 3. Merge_overlap_Gene 4.LDblock_Gene_Merge 5. split_Big_LD
     # 6. Merge_small_region 7.Naming_Region split LD
