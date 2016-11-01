@@ -35,7 +35,7 @@ The algorithm partition the whole sequence into sub sequences of which size do n
 data(geno)
 data(SNPinfo)
 data(allgenelist)
-GPART(geno, SNPinfo, 22, allgenelist)
+GPART(geno, SNPinfo, 22, genelist)
 
 }
 \author{

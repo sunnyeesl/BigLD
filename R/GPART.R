@@ -28,7 +28,7 @@
 #' data(geno)
 #' data(SNPinfo)
 #' data(allgenelist)
-#' GPART(geno, SNPinfo, 22, allgenelist)
+#' GPART(geno, SNPinfo, 22, genelist)
 #'
 
 #' @importFrom plyr alply
