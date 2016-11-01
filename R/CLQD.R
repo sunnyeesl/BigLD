@@ -32,6 +32,7 @@
 #' @importFrom igraph graph_from_adjacency_matrix
 #' @importFrom igraph graph.adjacency
 #' @importFrom igraph max_cliques
+#' @importFrom igraph cliques
 #'
 # [1] 12 9 13 9 13 6 7 NA 7 7 6 4 8 4 NA 6 13 9 7 7 6 8 12 9 12 13 8 8 12 13
 # [31] 7 9 13 8 12 13 7 7 12 NA 10 10 NA 13 10 10 NA 10 18 NA 18 18 NA 18 18 18 18 NA 15 15
