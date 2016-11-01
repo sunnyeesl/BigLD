@@ -1,0 +1,19 @@
+Package: BigLD
+Type: Package
+Title: Big-LD
+Version: 0.1.0
+Author@R: as.person(c(
+    "Sun Ah Kim <sunny03@snu.ac.kr> [aut, cre]",
+    "Yun Joo Yoo <yyoo@snu.ac.kr> [aut]"
+  ))
+Maintainer: Sun Ah Kim <sunny03@snu.ac.kr>
+Description: BigLD is a package containg function which relate to the Big_LD algorithm.
+Depends: R (>= 3.3.1)
+Encoding: UTF-8
+License: What license is it under?
+LazyData: TRUE
+RoxygenNote: 5.0.1
+Imports: igraph,
+    grid,
+    plyr
+
