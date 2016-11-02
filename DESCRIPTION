@@ -11,7 +11,12 @@ Description: BigLD is a package containg function which relate to the Big_LD alg
 Depends: R (>= 3.3.1)
 Imports: igraph, 
       grid,
-      plyr
+      Matrix,
+      magrittr,
+      NMF,
+      irlba,
+      plyr,
+      Rcpp (>= 0.11.0)
 Encoding: UTF-8
 License: GPL-2
 LazyData: TRUE
