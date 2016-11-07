@@ -42,8 +42,11 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
     #######################################################################################################
     # sub-Functions 1. cutsequence.modi, 2.intervalCliqueList, 3. find.maximum.indept, 4. constructLDblock, 5. CLQ
     cutsequence.modi = function(geno, leng, CLQcut, subSegmSize) {
+      print("split whole sequence into subsegments")
         ## region length<=3000
         if (dim(geno)[2] <= subSegmSize) {
+            print("cutting sequence, done")
+            print("there is only one sub-region!")
             return(list(dim(geno)[2], NULL))
         } else {
             cutpoints <- NULL
@@ -266,7 +269,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
     } else if (dim(SNPinfo)[2] != 2) {
         stop("SNPinfo data Must Contain 2 columns!!")
     }
-    # split all sequence into subsegments
+    # print("split whole sequence into subsegments")
     cutpoints.all <- cutsequence.modi(geno, leng, CLQcut, subSegmSize)
     cutpoints <- cutpoints.all[[1]]
     atfcut <- (cutpoints.all[[2]])
