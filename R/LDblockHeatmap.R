@@ -99,7 +99,17 @@ LDblockHeatmap <- function(geno, SNPinfo, chrN, showSNPs = NULL, LDblockResult=N
     subLDblockRes = Big_LD(subgeno, subSNPinfo)
     print("Big_LD, done!")
   }else{
-    subLDblockRes = LDblockResult[which(LDblockResult$start.bp >= min(subSNPinfo[,2]) & LDblockResult$end.bp <= max(subSNPinfo[,2])),]
+    subLDblockRes = LDblockResult[which(LDblockResult$end.bp >= min(subSNPinfo[,2]) & LDblockResult$start.bp <= max(subSNPinfo[,2])),]
+    subLDblockRes$start[1] = which(SNPinfo[,1]==subSNPinfo[1,1])
+    levels(subLDblockRes$start.rsID) <- c(levels(subLDblockRes$start.rsID), as.character(subSNPinfo[1,1]))
+    subLDblockRes$start.rsID[1] <- subSNPinfo[1,1]
+    subLDblockRes$start.bp[1] = subSNPinfo[1,2]
+    subsize = dim(subLDblockRes)[1]
+    subSNPinfosize = dim(subSNPinfo)[1]
+    subLDblockRes$end[subsize] = max(chosencol)
+    levels(subLDblockRes$end.rsID) <- c(levels(subLDblockRes$end.rsID), as.character(subSNPinfo[subSNPinfosize,1]))
+    subLDblockRes$end.rsID[subsize] <- as.character(subSNPinfo[subSNPinfosize,1])
+    subLDblockRes$end.bp[subsize] = subSNPinfo[subSNPinfosize,2]
   }
 
   s = subLDblockRes$start
