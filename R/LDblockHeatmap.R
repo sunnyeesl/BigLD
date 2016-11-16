@@ -131,7 +131,7 @@ LDblockHeatmap <- function(geno, SNPinfo, chrN, showSNPs = NULL, LDblockResult=N
   subLDblockRes =  data.frame(s, e, s.rsID, e.rsID, s.bp, e.bp)
   colnames(subLDblockRes)=c("start", "end", "start.rsID", "end.rsID", "start.bp", "end.bp")
 
-  BlockstP = sapply(subLDblockRes$start.bp, function(x) which(min(abs(x-subSNPinfo[,2])) ==abs(x-subSNPinfo[,2]))[1])
+  BlockstP = sapply(subLDblockRes$start.bp, function(x) which(min(abs(x-subSNPinfo[,2])) ==abs(x-subSNPinfo[,2]))[1])-1
   BlockedP = sapply(subLDblockRes$end.bp, function(x) which(min(abs(x-subSNPinfo[,2])) ==abs(x-subSNPinfo[,2]))[1])
   if(!is.null(showSNPs)){
     showSNPsP = sapply(showSNPs[,2], function(x) which(abs(subSNPinfo[,2] - x) == min(abs(subSNPinfo[,2] - x)))[1])
