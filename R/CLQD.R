@@ -168,6 +168,7 @@ CLQD <- function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c
       compadjM = OCM[compov, compov]
       cg = graph_from_adjacency_matrix(compadjM, mode = "undirected", weighted = TRUE, diag = NULL, add.colnames = NA)
       if((median(coreness(cg))>80 & max(coreness(cg))>100)| (quantile(coreness(cg), 0.75)>100 & max(coreness(cg))>100)){
+        print("use heuristic procedure!")
         degrees = apply(r2Mat, 1, sum)
         maxdegv = which(degrees >=(quantile(degrees, 0.7)))
         # if(length(maxdegv)>=1){
