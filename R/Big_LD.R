@@ -18,7 +18,7 @@
 #' @param MAFcut An numeric value to specifying the MAF threshold. 
 #' @param subSegmSize  An integer value to specify the upper bound of the number of SNPs in a one-take sub-region.
 #' @param appendRare If \code{appendRare = TRUE}, the algorithm append rare SNPs (MAF<MAFcut) to the constructed LD blocks or add a new LD blocks
-#' 
+#' @param checkLargest If \code{checkLargest = TRUE}, the algorithm use heuristic procedure to reduce runtime of CLQ-D execution
 #'
 # <output>
 #' @return  A data frame of block estimation result.
