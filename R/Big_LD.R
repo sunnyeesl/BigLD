@@ -289,7 +289,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
     return(Totalblocks)
   }
   subBigLD = function(subgeno, subSNPinfo,  CLQcut, clstgap, checkLargest){
-    subbinvec <- CLQD5(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density",codechange = FALSE, checkLargest)
+    subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density",codechange = FALSE, checkLargest)
     # print('CLQ done!')
     bins <- c(1:max(subbinvec[which(!is.na(subbinvec))]))
     clstlist <- sapply(bins, function(x) which(subbinvec == x), simplify = FALSE)
@@ -467,7 +467,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
     subgeno <- geno[, nowst:nowed]
     subSNPinfo <- SNPinfo[nowst:nowed, ]
     # subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density", codechange = FALSE)
-    subbinvec <- CLQD5(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density",codechange = FALSE, checkLargest)
+    subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density",codechange = FALSE, checkLargest)
     print('CLQ done!')
     bins <- c(1:max(subbinvec[which(!is.na(subbinvec))]))
     clstlist <- sapply(bins, function(x) which(subbinvec == x), simplify = FALSE)
@@ -503,7 +503,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
         nowed = newbigblock[2]
         subgeno <- geno[, nowst:nowed]
         subSNPinfo <- SNPinfo[nowst:nowed, ]
-        subbinvec <- CLQD5(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density", codechange = FALSE, checkLargest)
+        subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density", codechange = FALSE, checkLargest)
         # print('CLQ done!')
         bins <- c(1:max(subbinvec[which(!is.na(subbinvec))]))
         clstlist <- sapply(bins, function(x) which(subbinvec == x), simplify = FALSE)
