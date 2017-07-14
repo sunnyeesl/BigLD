@@ -16,6 +16,7 @@
 #' if \code{CLQmode = "Density"} then the algorithm gives priority to the clique of largest value of \eqn{(Number of SNPs)/(range of clique)},
 #' else if \code{CLQmode = "Maximal"}, then the algorithm gives priority to the largest clique.
 #' @param codechange If \code{TRUE}, choose the cliques after code change procedure.
+#' @param checkLargest If \code{checkLargest = TRUE}, the algorithm use heuristic procedure to reduce runtime
 # <output>
 #' @return A vector of cluster numbers of all SNPs (\code{NA} represents singleton cluster)
 #' @examples
