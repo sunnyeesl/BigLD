@@ -18,11 +18,13 @@
 #' @param MAFcut An numeric value to specifying the MAF threshold. 
 #' @param subSegmSize  An integer value to specify the upper bound of the number of SNPs in a one-take sub-region.
 #' @param appendRare If \code{appendRare = TRUE}, the algorithm append rare SNPs (MAF<MAFcut) to the constructed LD blocks or add a new LD blocks
-#' 
+#' @param checkLargest If \code{checkLargest = TRUE}, the algorithm use heuristic procedure to reduce runtime of CLQ-D execution
 #'
 # <output>
 #' @return  A data frame of block estimation result.
-#' Each row of data frame shows the starting SNP and end SNP of each estimated LD block
+#' Each row of data frame shows the starting SNP and end SNP of each estimated LD block.
+#' Note that the algorithm uses only non-monomorphic SNPs. 
+#' Therefore the output also contains only information of non-monomorphic SNPs, and the indices of SNPs in results are based on the indices of SNPs in pruned dataset by input parameters \code{MAFcut} or \code{appendRare}.
 #'
 #' @author Sun-Ah Kim <sunny03@snu.ac.kr>, Yun Joo Yoo <yyoo@snu.ac.kr>
 #' @seealso \code{\link{CLQD}}, \code{\link{LDblockHeatmap}}
@@ -449,7 +451,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
   geno <- Ogeno[,mafprun]
   SNPinfo <- OSNPinfo[mafprun,]
   # print("split whole sequence into subsegments")
-  cutpoints.all <- cutsequence.modi(geno, leng, CLQcut, subSegmSize)
+  cutpoints.all <- cutsequence.modi(geno, leng, subSegmSize)
   cutpoints <- cutpoints.all[[1]]
   atfcut <- (cutpoints.all[[2]])
   if (!is.null(atfcut)){
