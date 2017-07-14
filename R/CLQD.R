@@ -5,7 +5,7 @@
 #'
 #' @description \code{CLQD} partitioning the given data into subgroups that contain SNPs which are highly correlated.
 #'
-#' @param subgeno  A data frame or matrix of additive genotype data, each column is additive genotype of each SNP.
+#' @param subgeno  A data frame or matrix of additive genotype data, each column is additive genotype of each SNP. (Use data of non-monomorphic SNPs)
 #' @param subSNPinfo  A data frame or matrix of SNPs information. 1st column is rsID and 2nd column is bp position.
 #' @param CLQcut A numeric value of threshold for the correlation value |r|, between 0 to 1.
 #' @param clstgap An integer value to specifing the threshold of physical distance (bp) between two consecutive SNPs
@@ -18,7 +18,8 @@
 #' @param codechange If \code{TRUE}, choose the cliques after code change procedure.
 #' @param checkLargest If \code{checkLargest = TRUE}, the algorithm use heuristic procedure to reduce runtime
 # <output>
-#' @return A vector of cluster numbers of all SNPs (\code{NA} represents singleton cluster)
+#' @return A vector of cluster numbers of all SNPs (\code{NA} represents singleton cluster).
+#' 
 #' @examples
 #'
 #' data(geno)
