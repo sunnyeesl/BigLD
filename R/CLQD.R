@@ -163,7 +163,7 @@ CLQD <- function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c
     if(checkLargest == TRUE){
       g <- graph_from_adjacency_matrix(r2Mat, mode = "undirected", weighted = TRUE, diag = NULL, add.colnames = NA)
       compo = components(g)
-      componum = which(compo$csize==max(compo$csize))
+      componum = which(compo$csize==max(compo$csize))[1]
       compov = which(compo$membership==componum)
       compadjM = OCM[compov, compov]
       cg = graph_from_adjacency_matrix(compadjM, mode = "undirected", weighted = TRUE, diag = NULL, add.colnames = NA)
