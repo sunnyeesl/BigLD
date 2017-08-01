@@ -446,7 +446,9 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
   Omono = apply(Ogeno, 2, function(x) length(unique(x))!=1)
   Ogeno <- Ogeno[,Omono]
   OSNPinfo <- OSNPinfo[Omono,]
-  maf = apply(Ogeno, 2, function(x) sum(x)/(dim(Ogeno)[1]*2))
+  maf = apply(Ogeno, 2, function(x) mean(x,na.rm=TRUE)/2)
+  maf_ok=ifelse(maf>=0.5,1-maf,maf)
+  maf=maf_ok
   mafprun <- which(maf >= MAFcut)
   geno <- Ogeno[,mafprun]
   SNPinfo <- OSNPinfo[mafprun,]
