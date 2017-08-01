@@ -65,7 +65,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
         }
         # tick size = leng * (1/10)
         tick <- as.integer(leng * 1/10)
-        nowcm <- cor(geno[, (i - tick + 1):(i + tick)])
+        nowcm <- cor(geno[, (i - tick + 1):(i + tick)],  use="pairwise.complete.obs")
         nowr2 <- nowcm^2
         nowr2[which(nowr2 < 0.5)] = 0
         diag(nowr2) <- 0
@@ -76,7 +76,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
         }
         # tick size = leng
         tick <- leng
-        nowcm <- cor(geno[, (i - tick + 1):(i + tick)])
+        nowcm <- cor(geno[, (i - tick + 1):(i + tick)],  use="pairwise.complete.obs")
         nowr2 <- nowcm^2
         nowr2[which(nowr2 < 0.5)] = 0
         diag(nowr2) <- 0
@@ -109,7 +109,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
             }
             weakcount <- sapply(c((st + leng):(ed - leng)), function(x) {
               tick <- as.integer(leng/5)
-              nowCM <- cor(geno[, (x - tick + 1):(x + tick)])
+              nowCM <- cor(geno[, (x - tick + 1):(x + tick)],  use="pairwise.complete.obs")
               nowr2 <- nowCM^2
               diag(nowr2) <- 0
               length(which(nowr2[(1:tick), (tick + 1):(2 * tick)] > 0.5))
@@ -309,7 +309,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
       OSNPs = 1:max(snp1)
       firstB = LDblocks[1,]  
       secondSNPs = which(OSNPinfo[,2]>=firstB$start.bp & OSNPinfo[,2] <= firstB$end.bp)
-      cor2 = cor(Ogeno[,c(secondSNPs, OSNPs),drop=FALSE])^2
+      cor2 = cor(Ogeno[,c(secondSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2
       cor2 = cor2[1:length(secondSNPs), -(1:length(secondSNPs)), drop=FALSE]
       cor2num = apply(cor2, 2, function(x) {
         sum(x>CLQcut^2)
@@ -343,14 +343,14 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
           expandB = rbind(expandB, range(firstSNPs))
           firstSNPs = secondSNPs
         }else{
-          cor1 = cor(Ogeno[,c(firstSNPs, OSNPs),drop=FALSE])^2
+          cor1 = cor(Ogeno[,c(firstSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2
           cor1 = cor1[1:length(firstSNPs), -(1:length(firstSNPs)), drop=FALSE]
           cor1num = apply(cor1, 2, function(x) {
             sum(x>CLQcut^2)
           })
           cor1ratio = cor1num/(dim(cor1)[1])
           # cor1num = apply(cor1r2, 2, function(x) length(which(x>CLQcut^2))/length(firstSNPs))
-          cor2 = cor(Ogeno[,c(secondSNPs, OSNPs),drop=FALSE])^2
+          cor2 = cor(Ogeno[,c(secondSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2
           cor2 = cor2[1:length(secondSNPs), -(1:length(secondSNPs)), drop=FALSE]
           cor2num = apply(cor2, 2, function(x) {
             sum(x>CLQcut^2)
@@ -399,7 +399,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
     # firstSNPs
     if(max(firstSNPs)<(dim(Ogeno)[2]-1)){
       OSNPs = (max(firstSNPs)+1):(dim(Ogeno)[2])
-      cor1 = cor(Ogeno[,c(firstSNPs, OSNPs),drop=FALSE])^2
+      cor1 = cor(Ogeno[,c(firstSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2
       cor1 = cor1[1:length(firstSNPs), -(1:length(firstSNPs)), drop=FALSE]
       cor1num = apply(cor1, 2, function(x) {
         sum(x>CLQcut^2)
