@@ -18,7 +18,7 @@
 #' @param codechange If \code{TRUE}, choose the cliques after code change procedure.
 #' @param checkLargest If \code{checkLargest = TRUE}, the algorithm use heuristic procedure to reduce runtime
 # <output>
-#' @return A vector of cluster numbers of all SNPs (\code{NA} represents singleton cluster).
+#' @return A vector of cluster numbers of all non-monomorphic SNPs (\code{NA} represents singleton cluster).
 #' 
 #' @examples
 #'
