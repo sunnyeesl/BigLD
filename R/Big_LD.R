@@ -23,9 +23,7 @@
 # <output>
 #' @return  A data frame of block estimation result.
 #' Each row of data frame shows the starting SNP and end SNP of each estimated LD block.
-#' Note that the algorithm uses only non-monomorphic SNPs. 
-#' Therefore the output also contains only information of non-monomorphic SNPs, and the indices of SNPs in results are based on the indices of SNPs in pruned dataset by input parameters \code{MAFcut} or \code{appendRare}.
-#'
+#' 
 #' @author Sun-Ah Kim <sunny03@snu.ac.kr>, Yun Joo Yoo <yyoo@snu.ac.kr>
 #' @seealso \code{\link{CLQD}}, \code{\link{LDblockHeatmap}}
 #'
