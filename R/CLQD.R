@@ -142,7 +142,7 @@ CLQD <- function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c
   }
   # Main Function
   SNPbps = subSNPinfo[, 2]
-  OCM <- cor(subgeno, use="pairwise.complete.obs")
+  OCM <- suppressWarnings(cor(subgeno, use="pairwise.complete.obs"))
   diag(OCM) <- 0
   OCM[abs(OCM) < CLQcut] <- 0
   OCM[is.na(OCM)]<-0
