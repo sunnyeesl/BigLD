@@ -307,7 +307,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
       OSNPs = 1:max(snp1)
       firstB = LDblocks[1,]  
       secondSNPs = which(OSNPinfo[,2]>=firstB$start.bp & OSNPinfo[,2] <= firstB$end.bp)
-      cor2 = cor(Ogeno[,c(secondSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2
+      cor2 = suppressWarnings(cor(Ogeno[,c(secondSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2)
       cor2 = cor2[1:length(secondSNPs), -(1:length(secondSNPs)), drop=FALSE]
       cor2num = apply(cor2, 2, function(x) {
         sum(x>CLQcut^2)
@@ -341,14 +341,14 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
           expandB = rbind(expandB, range(firstSNPs))
           firstSNPs = secondSNPs
         }else{
-          cor1 = cor(Ogeno[,c(firstSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2
+          cor1 = suppressWarnings(cor(Ogeno[,c(firstSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2)
           cor1 = cor1[1:length(firstSNPs), -(1:length(firstSNPs)), drop=FALSE]
           cor1num = apply(cor1, 2, function(x) {
             sum(x>CLQcut^2)
           })
           cor1ratio = cor1num/(dim(cor1)[1])
           # cor1num = apply(cor1r2, 2, function(x) length(which(x>CLQcut^2))/length(firstSNPs))
-          cor2 = cor(Ogeno[,c(secondSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2
+          cor2 = suppressWarnings(cor(Ogeno[,c(secondSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2)
           cor2 = cor2[1:length(secondSNPs), -(1:length(secondSNPs)), drop=FALSE]
           cor2num = apply(cor2, 2, function(x) {
             sum(x>CLQcut^2)
@@ -397,7 +397,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
     # firstSNPs
     if(max(firstSNPs)<(dim(Ogeno)[2]-1)){
       OSNPs = (max(firstSNPs)+1):(dim(Ogeno)[2])
-      cor1 = cor(Ogeno[,c(firstSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2
+      cor1 = suppressWarnings(cor(Ogeno[,c(firstSNPs, OSNPs),drop=FALSE],  use="pairwise.complete.obs")^2)
       cor1 = cor1[1:length(firstSNPs), -(1:length(firstSNPs)), drop=FALSE]
       cor1num = apply(cor1, 2, function(x) {
         sum(x>CLQcut^2)
