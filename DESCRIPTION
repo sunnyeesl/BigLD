@@ -16,7 +16,7 @@ Imports: igraph,
       NMF,
       irlba,
       plyr,
-      Rcpp (>= 0.11.0)
+      Rcpp
 Encoding: UTF-8
 License: GPL-2
 LazyData: TRUE
