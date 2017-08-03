@@ -40,7 +40,7 @@
 #' @export
 #' 
 Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, subSegmSize = 1500, MAFcut = 0.05, 
-                    appendrare = TRUE, checkLargest = TRUE) {
+                   appendrare = TRUE, checkLargest = TRUE) {
   # packages
   # library(igraph)
   #######################################################################################################
@@ -435,16 +435,18 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
   # Main part input data check!!!!!!!!!!!!!!!!!
   Ogeno = geno
   OSNPinfo = SNPinfo
-  rm(geno)
-  rm(SNPinfo)
   if (dim(Ogeno)[2] != dim(OSNPinfo)[1]) {
     stop("N of SNPs in geno data and N of SNPs in SNPinfo data Do Not Match!!")
     
   } else if (dim(OSNPinfo)[2] != 2) {
     stop("SNPinfo data Must Contain 2 columns!!")
   }
-  Omono = apply(Ogeno, 2, function(x) length(unique(x))!=1)
+  Omono = apply(Ogeno, 2, function(x) {
+    y<- x[!is.na(x)]
+    length(unique(y))!=1
+  })
   Ogeno <- Ogeno[,Omono]
+  monoSNPs = OSNPinfo[!Omono,]
   OSNPinfo <- OSNPinfo[Omono,]
   maf = apply(Ogeno, 2, function(x) mean(x,na.rm=TRUE)/2)
   maf_ok=ifelse(maf>=0.5,1-maf,maf)
@@ -564,5 +566,8 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
   if(appendrare==TRUE){
     LDblocks<-appendSGTs(LDblocks, Ogeno, OSNPinfo, CLQcut=CLQcut, clstgap = clstgap, checkLargest)
   }
+  allSNPbp = sort(c(monoSNPs[,2], OSNPinfo[,2]))
+  LDblocks$start <- match(LDblocks$start.bp, allSNPbp)
+  LDblocks$end <- match(LDblocks$end.bp, allSNPbp)
   return(LDblocks)
 }
