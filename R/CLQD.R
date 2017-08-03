@@ -144,6 +144,7 @@ CLQD <- function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c
   OCM <- cor(subgeno, use="pairwise.complete.obs")
   diag(OCM) <- 0
   OCM[abs(OCM) < CLQcut] <- 0
+  OCM[is.na(OCM)]<-0
   r2Mat <- OCM^2
   r2Mat[r2Mat < CLQcut^2] <- 0
   r2Mat[r2Mat >= CLQcut^2] <- 1
