@@ -157,7 +157,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
       }
     }
     diag(adjacencyM) <- 0
-    interval.graph <- graph.adjacency(adjacencyM, mode = "undirected", weighted = TRUE, diag = NULL, add.colnames = NULL)
+    interval.graph <- graph.adjacency(adjacencyM, mode = "undirected", weighted = TRUE, diag = FALSE, add.colnames = NULL)
     # print(paste("max coreness", max(coreness(interval.graph))))
     # print(paste("ecount", ecount(interval.graph), "vertex*5 ", 5*IMsize))
     if(max(coreness(interval.graph))>10){ #ecount(interval.graph)> 5*IMsize|
