@@ -163,12 +163,12 @@ CLQD <- function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c
   if(subregionLeng<500) checkLargest = FALSE
   while(checkLargest == TRUE){
     if(checkLargest == TRUE){
-      g <- graph_from_adjacency_matrix(r2Mat, mode = "undirected", weighted = TRUE, diag = NULL, add.colnames = NA)
+      g <- graph_from_adjacency_matrix(r2Mat, mode = "undirected", weighted = TRUE, diag = FALSE, add.colnames = NA)
       compo = components(g)
       componum = which(compo$csize==max(compo$csize))[1]
       compov = which(compo$membership==componum)
       compadjM = OCM[compov, compov]
-      cg = graph_from_adjacency_matrix(compadjM, mode = "undirected", weighted = TRUE, diag = NULL, add.colnames = NA)
+      cg = graph_from_adjacency_matrix(compadjM, mode = "undirected", weighted = TRUE, diag = FALSE, add.colnames = NA)
       if((median(coreness(cg))>80 & max(coreness(cg))>100)| (quantile(coreness(cg), 0.75)>100 & max(coreness(cg))>100)){
         print("use heuristic procedure!")
         degrees = apply(r2Mat, 1, sum)
@@ -209,7 +209,7 @@ CLQD <- function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c
     }
   }
   print("end pre-steps")
-  g <- graph_from_adjacency_matrix(r2Mat, mode = "undirected", weighted = TRUE, diag = NULL, add.colnames = NA)
+  g <- graph_from_adjacency_matrix(r2Mat, mode = "undirected", weighted = TRUE, diag = FALSE, add.colnames = NA)
   max.cliques <- max_cliques(g, min = 2)
   bp.cliques <- lapply(max.cliques, function(x) re.SNPbps[x])
   split.bp.cliques <- new.split.cliques(bp.cliques, clstgap)
