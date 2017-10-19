@@ -50,7 +50,6 @@ There are two CLQ methods, original CLQ(`ClQmode = 'Maximal'`) and CLQD (`ClQmod
 
 ```{r CLQD, results='hide'}
 CLQres = CLQD(geno, SNPinfo, CLQmode = 'Density')
-head(CLQres, n = 40)
 ```
 
 ```{r CLQDres}
@@ -58,7 +57,7 @@ head(CLQres, n = 40)
 ```
 ## Big_LD
 
-'Big_LD` returns the estimation of LD block regions of given data.
+`Big_LD` returns the estimation of LD block regions of given data.
 
 ```{r Big_LD}
 BigLDres = Big_LD(geno, SNPinfo)
@@ -67,7 +66,7 @@ BigLDres
 If you want to apply heuristic procedure, add option `checkLargest = TRUE`.
 
 ```{r Big_LDheuristic, eval=FALSE}
-Big_LD(geno, SNPinfo, MAFcut = 0.05, checkLargest = TRUE, appendrare = TRUE)
+Big_LD(geno, SNPinfo, checkLargest = TRUE)
 ```
 
 ## LDblockHeatmap

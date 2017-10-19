@@ -78,7 +78,7 @@ head(CLQres, n = 40)
     ## [18]  26  81  57  88  88  NA  88  88  81  88  81  81  91  81  81 106  81
     ## [35]  91  81  81  88  81  91
 
-Big_LD
+Big\_LD
 -------
 
 `Big_LD` returns the estimation of LD block regions of given data.
@@ -93,7 +93,7 @@ BigLDres = Big_LD(geno, SNPinfo)
     ## [1] "end pre-steps"
     ## [1] "CLQ done!"
     ## [1] 1 1
-    ## [1] "2017-10-19 17:29:47 KST"
+    ## [1] "2017-10-19 17:37:33 KST"
 
 ``` r
 BigLDres
@@ -140,7 +140,7 @@ BigLDres
 If you want to apply heuristic procedure, add option `checkLargest = TRUE`.
 
 ``` r
-Big_LD(geno, SNPinfo, MAFcut = 0.05, checkLargest = TRUE, appendrare = TRUE)
+Big_LD(geno, SNPinfo, checkLargest = TRUE)
 ```
 
 LDblockHeatmap
