@@ -1,5 +1,5 @@
 ---
-title: "Big-LD"
+title: "Big-LD: A new haplotype block detection method"
 author: "Sunah Kim (sunny03@snu.ac.kr)"
 output: rmarkdown::github_document
 ---

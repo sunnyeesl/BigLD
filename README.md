@@ -1,4 +1,4 @@
-Big-LD
+Big-LD: A new haplotype block detection method
 ================
 Sunah Kim (<sunny03@snu.ac.kr>)
 
@@ -94,7 +94,7 @@ BigLDres = Big_LD(geno, SNPinfo)
     ## [1] "end pre-steps"
     ## [1] "CLQ done!"
     ## [1] 1 1
-    ## [1] "2017-10-19 17:21:42 KST"
+    ## [1] "2017-10-19 17:24:53 KST"
 
 ``` r
 BigLDres

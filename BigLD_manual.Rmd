@@ -1,11 +1,16 @@
 ---
 title: "Big-LD"
 author: "Sunah Kim (sunny03@snu.ac.kr)"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.path = "README_figs/README-"
+)
 ```
 
 # Big-LD
@@ -83,4 +88,4 @@ LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize 
 LDblockres = LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize = 50, savefile = TRUE, filename = "LDheatmap2.tif")
 ```
 
-
+If you have any suggestion or question, please contact us (sunny03@snu.ac.kr).
