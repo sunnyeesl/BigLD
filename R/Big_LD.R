@@ -38,7 +38,7 @@
 #' @export
 #' 
 Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, subSegmSize = 1500, MAFcut = 0.05, 
-                   appendrare = TRUE, checkLargest = TRUE) {
+                   appendrare = TRUE, checkLargest = FALSE) {
   # packages
   # library(igraph)
   #######################################################################################################
