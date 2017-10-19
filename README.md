@@ -81,7 +81,7 @@ head(CLQres, n = 40)
 Big\_LD
 -------
 
-'Big\_LD\` returns the estimation of LD block regions of given data.
+`Big\_LD\` returns the estimation of LD block regions of given data.
 
 ``` r
 BigLDres = Big_LD(geno, SNPinfo)
