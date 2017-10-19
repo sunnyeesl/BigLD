@@ -68,7 +68,6 @@ CLQD
 
 ``` r
 CLQres = CLQD(geno, SNPinfo, CLQmode = 'Density')
-head(CLQres, n = 40)
 ```
 
 ``` r
