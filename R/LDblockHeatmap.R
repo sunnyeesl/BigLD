@@ -179,7 +179,7 @@ LDblockHeatmap <- function(geno, SNPinfo, chrN, showSNPs = NULL, LDblockResult=N
   tickposi2 = BlockedP.tick*(1/dim(M)[1])-0.005
   tickname = c(tickname.st, tickname.ed)
   tickposi = c(tickposi1, tickposi2)
-  print(length(tickname))
+  # print(length(tickname))
   LDticks = textGrob(tickname, x = tickposi, y = tickposi, just = c("left", "centre"),rot = -45, gp = gpar(cex = 0.5), vp = VPtick)
   LDblockHeatmap = gTree(children=gList(ldheatmap, WhiteTri, BlockBoundaries),name="LDHeatmap", vp = VPheatmap)
   if(is.null(showSNPsP)){
