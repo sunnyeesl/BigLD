@@ -9,11 +9,11 @@
 #'
 #' @param geno A data frame or matrix of additive genotype data, each column is additive genotype of each SNP.
 #' @param SNPinfo A data frame or matrix of SNPs information.  1st column is rsID and 2nd column is bp position.
-#' @param chrN A integer value to specify chromosome number of the given data.
+#' @param chrN A character value to specify chromosome number of the given data.
 #' @param showSNPs A data frame which is part of \code{SNPinfo} that you want to show in the result LDblock heatmap.
 #' The default is \code{NULL}
 #' @param LDblockResult  A data frame obtained by \code{Big_LD} function.
-#'  If \code{NULL}(default), the \code{GPART} function first excute \code{Big_LD} function to obtain LD blocks estimation result.
+#'  If \code{NULL}(default), the \code{LDblockHeatmap} function first excute \code{Big_LD} function to obtain LD blocks estimation result.
 #'
 #' @param tick A character string to specify how to show first SNPs and last SNPs of LD blocks,
 #' in \code{"bp"} or in \code{"rsID"}.
@@ -25,6 +25,7 @@
 #' the blocks whose size is less than \eqn{k} is shown with only boundaries.
 #' @param savefile logical. If \code{TRUE}, save tif file into work directory and
 #' the file is named after the chromosome and the physical range to draw. The default is \code{FALSE}
+#' @param filename A charactervalue. If \code{savefile = TRUE}, the tif file is saved in work directory with the given name.
 # < output >
 #' @return A grid graphical object of LD block heatmap.
 #' The LD block heatmap will be presented on the screen after execution of the function.
@@ -36,7 +37,7 @@
 #'
 #' data(geno)
 #' data(SNPinfo)
-#' LDblockHeatmap(geno, SNPinfo,chrN = 22, showSNPs = NULL)
+#' LDblockHeatmap(geno, SNPinfo, 22, showSNPs = NULL)
 #' LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize = 10, savefile = TRUE)
 #' @import grid
 # TotalMap : object of heatmap.
@@ -51,7 +52,7 @@
 
 #' @export
 LDblockHeatmap <- function(geno, SNPinfo, chrN, showSNPs = NULL, LDblockResult=NULL, tick = c("bp", "rsID"), st.bp=0 , ed.bp = Inf,
-                          showLDsize = 3, savefile = FALSE){
+                          showLDsize = 3, savefile = FALSE, filename = "LDheatmap.tif"){
   # packagese
   # library(grid)
   ########################################################################################################
@@ -205,7 +206,8 @@ LDblockHeatmap <- function(geno, SNPinfo, chrN, showSNPs = NULL, LDblockResult=N
     grid.draw(TotalMap)
     return(TotalMap)
   } else {
-    tiff(paste("LDblock_heatmap_chr",chrN,"-", min(subSNPinfo[,2]), "-", max(subSNPinfo[,2]), ".tif", sep=""),
+    fileN = filename
+    tiff(fileN,
          res = 300, height=210, width=210, units = 'mm')
     grid.draw(TotalMap)
     dev.off()
