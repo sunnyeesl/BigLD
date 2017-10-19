@@ -42,7 +42,7 @@
 #' @export
 #' 
 CLQD <- function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c("Density", "Maximal"), 
-                  codechange = FALSE,  checkLargest = TRUE) {
+                  codechange = FALSE,  checkLargest = FALSE) {
   # packages
   # library(igraph)
   #######################################################################################################
