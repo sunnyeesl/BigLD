@@ -38,7 +38,7 @@
 #' @export
 #' 
 Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, subSegmSize = 1500, MAFcut = 0.05, 
-                   appendrare = TRUE, checkLargest = TRUE) {
+                   appendrare = TRUE, checkLargest = FALSE) {
   # packages
   # library(igraph)
   #######################################################################################################
@@ -224,7 +224,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
         maybe.pred <- pre.range[[i]]
         now.info <- info[maybe.pred, , drop = FALSE]
         max.info <- now.info[which(now.info[, 2] == max(now.info[, 2])), , drop = FALSE]
-        if (dim(max.info)[1] != 1)
+        if (dim(max.info)[1] > 1)
           max.info <- max.info[1, , drop = FALSE]
         info[i, 2] <- sample.weight[i] + max.info[2]
         info[i, 3] <- max.info[1]
