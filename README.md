@@ -94,7 +94,7 @@ BigLDres = Big_LD(geno, SNPinfo)
     ## [1] "end pre-steps"
     ## [1] "CLQ done!"
     ## [1] 1 1
-    ## [1] "2017-10-19 17:18:09 KST"
+    ## [1] "2017-10-19 17:21:42 KST"
 
 ``` r
 BigLDres
@@ -155,7 +155,7 @@ You can input the results obtained using Big-LD (`LDblockResult= BigLDres`). If 
 LDblockHeatmap(geno, SNPinfo, 22, LDblockResult= BigLDres)
 ```
 
-![](BigLD_manual_files/figure-markdown_github-ascii_identifiers/LDheatmap1-1.png)
+![](README_figs/README-LDheatmap1-1.png)
 
 You can show the location of the specific SNPs (`showSNPs = SNPinfo[c(100, 200), ]` shows the 100th and 200th SNPs), or give the threshold for LD block sizes to show SNP information (`showLDsize = 50`). If you want to save the LD heatmap results as tif file, add options such as `savefile = TRUE, filename = "LDheatmap2.tif"`.
 
@@ -163,6 +163,6 @@ You can show the location of the specific SNPs (`showSNPs = SNPinfo[c(100, 200),
 LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize = 50, savefile = TRUE, filename = "LDheatmap2.tif")
 ```
 
-![](BigLD_manual_files/figure-markdown_github-ascii_identifiers/LDheatmap3-1.png)
+![](README_figs/README-LDheatmap3-1.png)
 
 If you have any suggestion or question, please contact us (<sunny03@snu.ac.kr>).
