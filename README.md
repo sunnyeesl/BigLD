@@ -68,16 +68,16 @@ CLQD
 
 ``` r
 CLQres = CLQD(geno, SNPinfo, CLQmode = 'Density')
+head(CLQres, n = 40)
 ```
 
-    ## [1] "end pre-steps"
-
 ``` r
-head(CLQres, n = 20)
+head(CLQres, n = 40)
 ```
 
     ##  [1]  25  25 106  57  25  81  25  25  57  57  15  15  15  81  57  26  26
-    ## [18]  26  81  57
+    ## [18]  26  81  57  88  88  NA  88  88  81  88  81  81  91  81  81 106  81
+    ## [35]  91  81  81  88  81  91
 
 Big\_LD
 -------
@@ -94,7 +94,7 @@ BigLDres = Big_LD(geno, SNPinfo)
     ## [1] "end pre-steps"
     ## [1] "CLQ done!"
     ## [1] 1 1
-    ## [1] "2017-10-19 17:24:53 KST"
+    ## [1] "2017-10-19 17:29:47 KST"
 
 ``` r
 BigLDres

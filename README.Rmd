@@ -48,9 +48,13 @@ head(SNPinfo)
 `CLQD` partitioning the SNPs into subgroups such that each subgroup contains highly correlated SNPs.
 There are two CLQ methods, original CLQ(`ClQmode = 'Maximal'`) and CLQD (`ClQmode = 'Density'`).
 
-```{r CLQD}
+```{r CLQD, results='hide'}
 CLQres = CLQD(geno, SNPinfo, CLQmode = 'Density')
-head(CLQres, n = 20)
+head(CLQres, n = 40)
+```
+
+```{r CLQDres}
+head(CLQres, n = 40)
 ```
 ## Big_LD
 
