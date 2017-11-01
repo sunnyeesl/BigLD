@@ -63,7 +63,7 @@ head(CLQres, n = 40)
 BigLDres = Big_LD(geno, SNPinfo)
 BigLDres
 ```
-If you want to apply heuristic procedure, add option `checkLargest = TRUE`.
+If you want to apply heuristic procedure (especially, when there are memory issues), add option `checkLargest = TRUE`.
 
 ```{r Big_LDheuristic, eval=FALSE}
 Big_LD(geno, SNPinfo, checkLargest = TRUE)
@@ -91,4 +91,5 @@ LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize 
 LDblockres = LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize = 50, savefile = TRUE, filename = "LDheatmap2.tif")
 ```
 
+Type `?functionname`, then you can see the document of the function.
 If you have any suggestion or question, please contact us (sunny03@snu.ac.kr).

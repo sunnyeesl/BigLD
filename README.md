@@ -93,7 +93,7 @@ BigLDres = Big_LD(geno, SNPinfo)
     ## [1] "end pre-steps"
     ## [1] "CLQ done!"
     ## [1] 1 1
-    ## [1] "2017-10-19 17:37:33 KST"
+    ## [1] "2017-11-01 15:16:40 KST"
 
 ``` r
 BigLDres
@@ -137,7 +137,7 @@ BigLDres
     ## 35   879  882   rs5747408   rs9604802 18397120 18398018
     ## 36   883 1000   rs9604803   rs9605461 18398207 18459658
 
-If you want to apply heuristic procedure, add option `checkLargest = TRUE`.
+If you want to apply heuristic procedure (especially, when there are memory issues), add option `checkLargest = TRUE`.
 
 ``` r
 Big_LD(geno, SNPinfo, checkLargest = TRUE)
@@ -164,4 +164,4 @@ LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize 
 
 ![](README_figs/README-LDheatmap3-1.png)
 
-If you have any suggestion or question, please contact us (<sunny03@snu.ac.kr>).
+Type `?functionname`, then you can see the document of the function. If you have any suggestion or question, please contact us (<sunny03@snu.ac.kr>).
