@@ -44,52 +44,54 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
   #######################################################################################################
   # sub-Functions 1. cutsequence.modi, 2.intervalCliqueList, 3. find.maximum.indept, 4. constructLDblock, 5. CLQ
   
-  cutsequence.modi = function(geno, leng, subSegmSize) {
+  cutsequence.modi <- function(geno, leng, subSegmSize) 
+  {
     print("split whole sequence into subsegments")
     modeNum <- 1
     lastnum <- 0 
-    ## region length<=3000
+    # region length<=3000
     if (dim(geno)[2] <= subSegmSize) {
-      print("cutting sequence, done")
       print("there is only one sub-region!")
       return(list(dim(geno)[2], NULL))
     } else {
+      # sq = floor(log(leng, base = 10))
+      calterms = c(1, 10, leng)
+      # calterms = unique(c(calterms, leng))
+      # calend = tail(calterms,1)
       cutpoints <- NULL
-      i = leng
+      i = leng # i :current candidate cutposition
       while (i <= (dim(geno)[2] - leng)) {
         if((i-lastnum) > 5*subSegmSize){
           modeNum <- 2
           break; 
         }
         # tick size = leng * (1/10)
-        tick <- as.integer(leng * 1/10)
-        nowcm <- cor(geno[, (i - tick + 1):(i + tick)],  use="pairwise.complete.obs")
-        nowr2 <- nowcm^2
-        nowr2[which(nowr2 < 0.5)] = 0
-        diag(nowr2) <- 0
-        if (length(which(nowr2[1:tick, (tick + 1):(2 * tick)] > 0)) > 0) {
-          # print(i)
-          i = i + 1
-          next
+        for(j in calterms){
+          # print(j)
+          nowcm <- cor(geno[,(i-j+1):(i)], geno[,((i+1):(i+j))]
+                       ,use="pairwise.complete.obs")
+          nowr2 <- nowcm^2
+          nowr2[which(nowr2 < 0.5)] = 0
+          if(sum(nowr2)>0){
+            i<-i+1
+            cutnow <- FALSE
+            break
+          }
+          if(j==calend){
+            cutnow <-TRUE
+          }
         }
-        # tick size = leng
-        tick <- leng
-        nowcm <- cor(geno[, (i - tick + 1):(i + tick)],  use="pairwise.complete.obs")
-        nowr2 <- nowcm^2
-        nowr2[which(nowr2 < 0.5)] = 0
-        diag(nowr2) <- 0
-        if (length(which(nowr2[1:tick, (tick + 1):(2 * tick)] > 0)) > 0) {
-          i = i + 1
-          next
-        } else {
-          print(c(i))
-          cutpoints <- c(cutpoints, i)
-          i <- i + (leng/2)
+        if(cutnow == TRUE){
+          cutpoints = c(cutpoints, i)
           lastnum = i
+          print(i)
+          i<-i+(leng/2)
+          cutnow = FALSE
         }
+        # 
       }##end while
       if(modeNum == 1){
-        cutpoints <- c(cutpoints, dim(geno)[2])
+        cutpoints <- c(0,cutpoints, dim(geno)[2])
         # separate too big regions candi.cutpoints return(cutpoints,candi.cutpoints)
         atfcut <- NULL
         while (max(diff(cutpoints)) > subSegmSize) {
@@ -107,10 +109,11 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
             }
             weakcount <- sapply(c((st + leng):(ed - leng)), function(x) {
               tick <- as.integer(leng/5)
-              nowCM <- cor(geno[, (x - tick + 1):(x + tick)],  use="pairwise.complete.obs")
+              nowCM <- cor(geno[, (x - tick + 1):(x)], geno[, (x+ 1):(x + tick)]
+                           ,use="pairwise.complete.obs")
               nowr2 <- nowCM^2
               diag(nowr2) <- 0
-              length(which(nowr2[(1:tick), (tick + 1):(2 * tick)] > 0.5))
+              length(which(nowr2>= 0.5))
             })
             weakcount.s <- sort(weakcount)
             weaks <- weakcount.s[10]
@@ -118,12 +121,13 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
             weakpoint <- weakpoint + st + leng - 1
             nearcenter = sapply(weakpoint, function(x) abs((ed - x) - (x - st)), simplify = TRUE)
             addcut <- weakpoint[which(nearcenter == min(nearcenter))][1]
+            print(paste("add cutpoint", addcut))
             numvec <- c(numvec, addcut)
             atfcut <- c(atfcut, addcut)
           }  ##end for
           cutpoints <- sort(c(cutpoints, numvec))
           newcandi = which(diff(cutpoints) > subSegmSize)
-          remaxsize = max(diff(cutpoints))
+          # remaxsize = max(diff(cutpoints))
           # print(remaxsize) print(newcandi)
           if (length(newcandi) == 0) {
             break
