@@ -77,7 +77,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
             cutnow <- FALSE
             break
           }
-          if(j==calend){
+          if(j==leng){
             cutnow <-TRUE
           }
         }
