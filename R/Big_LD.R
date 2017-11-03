@@ -463,6 +463,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
   if (!is.null(atfcut)){
     atfcut <- sort(atfcut)
   }
+  cutpoints = setdiff(cutpoints, 0)
   cutblock <- cbind(c(1, cutpoints + 1), c(cutpoints, dim(geno)[2]))
   cutblock <- cutblock[-(dim(cutblock)[1]), , drop = FALSE]
   LDblocks <- matrix(NA, dim(SNPinfo)[1], 2)
