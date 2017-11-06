@@ -72,7 +72,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
                        ,use="pairwise.complete.obs")
           nowr2 <- nowcm^2
           nowr2[which(nowr2 < 0.5)] = 0
-          if(sum(nowr2)>0){
+          if(sum(nowr2,na.rm = T)>0){
             i<-i+1
             cutnow <- FALSE
             break
