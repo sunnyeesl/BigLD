@@ -572,5 +572,6 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
   allSNPbp = sort(c(monoSNPs[,2], OSNPinfo[,2]))
   LDblocks$start <- match(LDblocks$start.bp, allSNPbp)
   LDblocks$end <- match(LDblocks$end.bp, allSNPbp)
+  LDblocks <- LDblocks[order(LDblocks[,1]),]
   return(LDblocks)
 }
