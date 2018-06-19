@@ -38,7 +38,7 @@
 #' @export
 #' 
 Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, subSegmSize = 1500, MAFcut = 0.05, 
-                   appendrare = FALSE, checkLargest = FALSE) {
+                   appendrare = FALSE, checkLargest = FALSE, CLQmode="Density") {
   # packages
   # library(igraph)
   #######################################################################################################
@@ -290,8 +290,8 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
     }
     return(Totalblocks)
   }
-  subBigLD = function(subgeno, subSNPinfo,  CLQcut, clstgap, checkLargest){
-    subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density",codechange = FALSE, checkLargest)
+  subBigLD = function(subgeno, subSNPinfo,  CLQcut, clstgap, CLQmode, checkLargest){
+    subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode,codechange = FALSE, checkLargest)
     # print('CLQ done!')
     bins <- c(1:max(subbinvec[which(!is.na(subbinvec))]))
     clstlist <- sapply(bins, function(x) which(subbinvec == x), simplify = FALSE)
@@ -327,7 +327,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
       if(length(reOSNPs)>1){
         subgeno = Ogeno[, reOSNPs]
         subSNPinfo = OSNPinfo[reOSNPs,]
-        subBlocks = subBigLD(subgeno, subSNPinfo,  CLQcut, clstgap, checkLargest)
+        subBlocks = subBigLD(subgeno, subSNPinfo,  CLQcut, CLQmode,clstgap, checkLargest)
         subBlocks = subBlocks+min(reOSNPs)-1
         expandB = rbind(expandB, subBlocks)
       }
@@ -374,7 +374,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
             if(length(reOSNPs)>1){
               subgeno = Ogeno[, reOSNPs]
               subSNPinfo = OSNPinfo[reOSNPs,]
-              subBlocks = subBigLD(subgeno, subSNPinfo,  CLQcut, clstgap, checkLargest)
+              subBlocks = subBigLD(subgeno, subSNPinfo,  CLQcut, CLQmode, clstgap, checkLargest)
               subBlocks = subBlocks+min(reOSNPs)-1
               expandB = rbind(expandB, subBlocks)
             }
@@ -383,7 +383,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
             #merge two blocks
             subgeno = Ogeno[, c(min(firstSNPs):max(secondSNPs))]
             subSNPinfo = OSNPinfo[c(min(firstSNPs):max(secondSNPs)),]
-            subBlocks = subBigLD(subgeno, subSNPinfo,  CLQcut, clstgap, checkLargest)
+            subBlocks = subBigLD(subgeno, subSNPinfo,  CLQcut,  CLQmode,clstgap, checkLargest)
             subBlocks = subBlocks+min(firstSNPs)-1
             if(dim(subBlocks)[1]==1) {
               firstSNPs = subBlocks[1,1]:subBlocks[1,2]
@@ -416,7 +416,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
       if(length(reOSNPs)>1){
         subgeno = Ogeno[, reOSNPs]
         subSNPinfo = OSNPinfo[reOSNPs,]
-        subBlocks = subBigLD(subgeno, subSNPinfo,  CLQcut, clstgap, checkLargest)
+        subBlocks = subBigLD(subgeno, subSNPinfo,  CLQcut,  CLQmode,clstgap, checkLargest)
         subBlocks = subBlocks+min(reOSNPs)-1
         expandB = rbind(expandB, subBlocks)
       }
@@ -474,7 +474,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
     subgeno <- geno[, nowst:nowed]
     subSNPinfo <- SNPinfo[nowst:nowed, ]
     # subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density", codechange = FALSE)
-    subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density",codechange = FALSE, checkLargest)
+    subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode,codechange = FALSE, checkLargest)
     print('CLQ done!')
     bins <- c(1:max(subbinvec[which(!is.na(subbinvec))]))
     clstlist <- sapply(bins, function(x) which(subbinvec == x), simplify = FALSE)
@@ -492,6 +492,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
   doneLDblocks <- LDblocks[which(!is.na(LDblocks[, 1])), , drop = FALSE]
   if (length(atfcut) != 0) {
     newLDblocks <- matrix(NA, dim(SNPinfo)[1], 2)
+    consecutive.atf = 0
     for(i in 1:(dim(doneLDblocks)[1]-1)){
       # if(i==1080) break;
       print(paste(i, dim(doneLDblocks)[1]))
@@ -502,7 +503,12 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
       nextblock = doneLDblocks[(i+1),]
       gap = c(endblock[2]:nextblock[1])
       if(length(intersect(gap, atfcut))>0){
+        consecutive.atf = consecutive.atf+1
         ## merge 
+        if(consecutive.atf>1){
+          addlinei = max(which(!is.na(newLDblocks[,1])==TRUE))
+          endblock = newLDblocks[addlinei,] 
+        }
         nowatfcut = intersect(gap, atfcut)
         newbigblock = range(c(endblock, nextblock))
         newbigblocksize = diff(newbigblock)+1
@@ -510,7 +516,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
         nowed = newbigblock[2]
         subgeno <- geno[, nowst:nowed]
         subSNPinfo <- SNPinfo[nowst:nowed, ]
-        subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode = "Density", codechange = FALSE, checkLargest)
+        subbinvec <- CLQD(subgeno, subSNPinfo, CLQcut, clstgap, CLQmode, codechange = FALSE, checkLargest)
         # print('CLQ done!')
         bins <- c(1:max(subbinvec[which(!is.na(subbinvec))]))
         clstlist <- sapply(bins, function(x) which(subbinvec == x), simplify = FALSE)
@@ -530,6 +536,7 @@ Big_LD <- function(geno, SNPinfo, CLQcut = 0.5, clstgap = 40000, leng = 200, sub
         # if(diff(newbigblock)+1 < subSegmSize)
         print(Sys.time())
       }else{
+        consecutive.atf = 0
         addlinei = min(which(is.na(newLDblocks[,1])==TRUE))
         newLDblocks[addlinei,] <-endblock
         #endblock <- nextblock

@@ -197,11 +197,12 @@ CLQD <- function(subgeno, subSNPinfo, CLQcut = 0.5, clstgap = 40000, CLQmode = c
         nowSNPsbploca = match(nowSNPsbp, SNPbps)
         binvector[nowSNPsbploca] <- binnum
         binnum = binnum + 1
-        r2Mat <- r2Mat[-Bignbds.c, -Bignbds.c]
-        OCM <- OCM[-Bignbds.c, -Bignbds.c]
+        r2Mat <- r2Mat[-Bignbds.c, -Bignbds.c, drop = FALSE]
+        OCM <- OCM[-Bignbds.c, -Bignbds.c, drop = FALSE]
         re.SNPbps <- re.SNPbps[-Bignbds.c]
         # print("case2")
         checkLargest = TRUE
+        if(length(re.SNPbps)<500)  checkLargest = FALSE
        
       }else{
         checkLargest = FALSE
