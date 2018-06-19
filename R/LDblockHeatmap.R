@@ -208,10 +208,10 @@ LDblockHeatmap <- function(geno, SNPinfo, chrN, showSNPs = NULL, LDblockResult=N
   } else {
     fileN = filename
     tiff(fileN,
-         res = 300, height=210, width=210, units = 'mm')
+         res = 100, height=210, width=210, units = 'mm')
     grid.draw(TotalMap)
     dev.off()
-    grid.draw(TotalMap)
-    return(TotalMap)
+    # grid.draw(TotalMap)
+    # return(TotalMap)
   }
 }
