@@ -33,12 +33,12 @@ The "gpart" has following features.
 * shows physical locations of LD blocks and SNPs
 * shows gene locations if the gene information is inputted (or by loading gene information from the Ensembl or UCSC database) .
 
-### the new SNP sequence partition algorithm `gpart`
+### the new SNP sequence partition algorithm `GPART`
 * divides the entire SNP sequence using LD block information (BigLD result) and gene information
 * can limit the min/max size of a block
 
 
-#### A BigLD result plotted by `LDblockHeatmap()`. 
+### A BigLD result plotted by the updated `LDblockHeatmap()` in "gpart" package. 
 
 * EAS population of 1000 Genomes phase 1 data
 * chr1:16Mb-17.9Mb  
