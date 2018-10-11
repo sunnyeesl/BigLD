@@ -18,78 +18,30 @@ knitr::opts_chunk$set(
 Big-LD is a block partition method based on interval graph modeling of LD bins which are clusters of strong pairwise LD SNPs, not necessarily physically consecutive.
 The detailed information about the Big-LD can be found in our paper published in [bioinformatics](https://academic.oup.com/bioinformatics/article/doi/10.1093/bioinformatics/btx609/4282661/A-new-haplotype-block-detection-method-for-dense).
 
-## Installation
-```{r, eval=FALSE}
-library("devtools")
-devtools::install_github("sunnyeesl/BigLD")
+The Big-LD algorithm and visualization function has been updated and implemented in a new package "gpart". 
+The package "gpart" can be downloaded from [bioconductor](https://bioconductor.org/packages/devel/bioc/html/gpart.html)
+
+The "gpart" has following features.
+
+### the updated `BigLD` function
+* supports two types of heuristic algorithm, `near-nonhrst` and `fast`. 
+* supports LD measures r2 and D' both.
+* supports PLINK formats (.ped, .map, .raw, .traw) and vcf format as input
+
+### the updated `LDblockHeatmap` function
+* shows up to 20000 SNPs.
+* shows physical locations of LD blocks and SNPs
+* shows gene locations if the gene information is inputted (or by loading gene information from the Ensembl or UCSC database) .
+
+### the new SNP sequence partition algorithm `gpart`
+* divides the entire SNP sequence using LD block information (BigLD result) and gene information
+* can limit the min/max size of a block
+
+
+#### A BigLD result plotted by `LDblockHeatmap()`. 
+
+* EAS population of 1000 Genomes phase 1 data
+* chr1:16Mb-17.9Mb  
+```{r, out.width = "1200px", echo = FALSE}
+knitr::include_graphics("README_figs/README-heatmap_all.png")
 ```
-```{r, message=FALSE}
-library(BigLD)
-```
-## Data
-
-You need an additive genotype data (each SNP genotype is coded in terms of the number of minor alleles) and a SNP information data.
-The package include sample genotype data and SNPinfo data. 
-
-Load the sample data (if you installed the BigLD packages).
-```{r data}
-data(geno)
-data(SNPinfo)
-```
-Or simply you can download the sample data from `/inst/extdata`
-The sample data include 1000SNPs and 286 individuals.
-```{r}
-geno[1:10, 1:7]
-head(SNPinfo)
-```
-
-## CLQD
-
-`CLQD` partitioning the SNPs into subgroups such that each subgroup contains highly correlated SNPs.
-There are two CLQ methods, original CLQ(`ClQmode = 'Maximal'`) and CLQD (`ClQmode = 'Density'`).
-
-```{r CLQD, results='hide'}
-CLQres = CLQD(geno, SNPinfo, CLQmode = 'Density')
-```
-
-```{r CLQDres}
-head(CLQres, n = 40)
-```
-## Big_LD
-
-`Big_LD` returns the estimation of LD block regions of given data.
-
-```{r Big_LD}
-BigLDres = Big_LD(geno, SNPinfo)
-BigLDres
-```
-If you want to apply heuristic procedure (especially, when there are memory issues), add option `checkLargest = TRUE`.
-
-```{r Big_LDheuristic, eval=FALSE}
-Big_LD(geno, SNPinfo, checkLargest = TRUE)
-```
-
-## LDblockHeatmap
-
-`LDblockHeatmap` visualize the LDblock boundaries detected by Big_LD.
-
-You can input the results obtained using Big-LD (`LDblockResult= BigLDres`). 
-If you do not input a Big-LD results, the `LDblockHeatmap` function first excute `Big_LD` function to obtain an LD block estimation result.
-
-```{r LDheatmap1, results='hide'}
-LDblockHeatmap(geno, SNPinfo, 22, LDblockResult= BigLDres)
-```
-
-You can show the location of the specific SNPs (`showSNPs = SNPinfo[c(100, 200), ]` shows the 100th and 200th SNPs), 
-or give the threshold for LD block sizes to show SNP information (`showLDsize = 50`).
-If you want to save the LD heatmap results as tif file, add options such as `savefile = TRUE, filename = "LDheatmap2.tif"`.
-
-```{r LDheatmap2, eval=FALSE}
-LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize = 50, savefile = TRUE, filename = "LDheatmap2.tif")
-```
-```{r LDheatmap3, results='hide', echo=FALSE}
-LDblockres = LDblockHeatmap(geno, SNPinfo, 22, showSNPs = SNPinfo[c(100, 200), ], showLDsize = 50, savefile = TRUE, filename = "LDheatmap2.tif")
-```
-
-Type `?functionname`, then you can see the document of the function.
-If you have any suggestion or question, please contact us (sunny03@snu.ac.kr).
