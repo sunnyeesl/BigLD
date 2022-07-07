@@ -28,7 +28,7 @@ The "gpart" has following features.
 -   divides the entire SNP sequence using LD block information (BigLD result) and gene information
 -   can limit the min/max size of a block
 
-### A BigLD result plotted by the updated `LDblockHeatmap()` in "gpart" package.
+### A BigLD result plotted by the updated `LDblockHeatmap()` in "gpart" package..
 
 -   EAS population of 1000 Genomes phase 1 data
 -   chr1:16Mb-17.9Mb
